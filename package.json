@@ -7,13 +7,6 @@
 		"dev": "ts-node-dev --respawn --transpile-only src/server.ts",
 		"test": "jest"
 	},
-	"jest": {
-		"preset": "ts-jest",
-		"testEnvironment": "node",
-		"setupFilesAfterEnv": [
-			"./jest.setup.js"
-		]
-	},
 	"author": "Timilehin Abodunrin",
 	"license": "ISC",
 	"devDependencies": {
