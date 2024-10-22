@@ -53,16 +53,7 @@ A RESTful API that allows user transfer money between themeselves.
     npm run dev
     ```
 
-5. Optionally, **Run with Docker**:
-    - Build and run Docker containers:
-        ```bash
-        docker-compose up --build
-        ```
-    - To stop and remove Docker containers:
-        ```bash
-        docker-compose down
-        ```
-6. To run tests:
+5. To run tests:
 
     ```bash
     npm test
