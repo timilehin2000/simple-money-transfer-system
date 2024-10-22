@@ -36,6 +36,7 @@
 		"joi": "^17.13.3",
 		"jsonwebtoken": "^9.0.2",
 		"pg": "^8.13.0",
+		"redis": "^4.7.0",
 		"reflect-metadata": "^0.2.2",
 		"typeorm": "^0.3.20"
 	}

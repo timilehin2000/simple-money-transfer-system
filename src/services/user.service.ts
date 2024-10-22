@@ -10,6 +10,7 @@ import {
 } from '../helpers/errorHandlers/apiError';
 import { Wallet } from '../entities';
 import { generateAccessToken } from '../utils/jwt';
+import redisClient from '../utils/cache';
 
 const userRepository = AppDataSource.getRepository(User);
 const walletRepository = AppDataSource.getRepository(Wallet);
@@ -73,6 +74,15 @@ export const getUserDetails = async (username: string): Promise<User> => {
 };
 
 export const getUserDetailsWithBalance = async (userId: string) => {
+    const cacheKey = `user_balance_${userId}`;
+
+    const cachedUserDetails = await redisClient.get(cacheKey);
+
+    if (cachedUserDetails) {
+        console.log('Cache hit for user details!');
+        return JSON.parse(cachedUserDetails);
+    }
+
     const user = await userRepository.findOne({
         where: { id: userId },
         relations: ['wallet'],
@@ -83,11 +93,15 @@ export const getUserDetailsWithBalance = async (userId: string) => {
         throw new NotFoundError('User not found');
     }
 
-    return {
+    const userDetails = {
         id: user.id,
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
         balance: user.wallet?.balance ?? 0,
     };
+
+    await redisClient.setEx(cacheKey, 3600, JSON.stringify(userDetails));
+
+    return userDetails;
 };
