@@ -79,7 +79,6 @@ export const getUserDetailsWithBalance = async (userId: string) => {
     const cachedUserDetails = await redisClient.get(cacheKey);
 
     if (cachedUserDetails) {
-        console.log('Cache hit for user details!');
         return JSON.parse(cachedUserDetails);
     }
 
