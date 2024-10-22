@@ -2,7 +2,7 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { CustomError } from '../../helpers/errorHandlers/customError';
 import { errorResponse } from '../../utils/responseHandler';
 import { QueryFailedError } from 'typeorm';
-import { TokenExpiredError } from 'jsonwebtoken';
+import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 const errorHandler = (
     err: ErrorRequestHandler,
@@ -31,6 +31,9 @@ const errorHandler = (
         }
     } else if (err instanceof TokenExpiredError) {
         message = 'Unauthorized. Please login';
+        statusCode = 401;
+    } else if (err instanceof JsonWebTokenError) {
+        message = err.message;
         statusCode = 401;
     }
 

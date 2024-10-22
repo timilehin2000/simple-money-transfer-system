@@ -2,9 +2,9 @@
 
 A RESTful API that allows user transfer money between themeselves.
 
-#### **BASE URL** - [https://backend-task-cpok.onrender.com/api/v1](https://backend-task-cpok.onrender.com//api/v1)
+#### **BASE URL** - [localhost:3000/api/v1](localhost:3000/api/v1)
 
-#### **POSTMAN DOCS** - [API Documentation on Postman](https://documenter.getpostman.com/view/36399546/2sAXqqcNbN#a856406c-037c-462d-a3e8-2f743d8e5fbe)
+#### **POSTMAN DOCS** - [API Documentation on Postman](https://documenter.getpostman.com/view/36399546/2sAXxY4U8D)
 
 ## API Endpoints
 

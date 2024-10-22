@@ -7,14 +7,16 @@ export const initiateTransferHandler = async (
     res: Response,
     next: NextFunction,
 ): Promise<void> => {
-    const { receiverId, amount, description } = req.body;
+    const { username, amount, description } = req.body;
+
+    console.log(req.body);
 
     const { userId } = req.user;
 
     try {
         const response = await transferService.initiateTransfer({
             senderId: userId,
-            receiverId,
+            username,
             amount,
             description,
         });

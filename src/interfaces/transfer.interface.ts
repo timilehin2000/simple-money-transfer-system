@@ -5,7 +5,7 @@ export enum TransferType {
 
 export interface InitiateTransferBody {
     senderId: string;
-    receiverId: string;
+    username: string;
     amount: number;
     description?: string;
 }

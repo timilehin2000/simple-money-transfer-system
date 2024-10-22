@@ -14,7 +14,7 @@ import {
 const transferRepository = AppDataSource.getRepository(Transfer);
 
 export const initiateTransfer = async (body: InitiateTransferBody) => {
-    const { senderId, receiverId, amount, description } = body;
+    const { senderId, username, amount, description } = body;
 
     const dataSource = AppDataSource;
 
@@ -24,7 +24,16 @@ export const initiateTransfer = async (body: InitiateTransferBody) => {
     await queryRunner.startTransaction();
 
     try {
-        if (senderId === receiverId) {
+        const receiver = await queryRunner.manager.findOne<User>('User', {
+            where: { username: username.toLowerCase() },
+            select: ['id'],
+        });
+
+        if (!receiver) {
+            throw new BadRequestError('User not found');
+        }
+
+        if (senderId === receiver.id) {
             throw new BadRequestError(
                 'You cannot transfer money to your own account',
             );
@@ -37,7 +46,7 @@ export const initiateTransfer = async (body: InitiateTransferBody) => {
         });
 
         const receiverWallet = await queryRunner.manager.findOne(Wallet, {
-            where: { user: { id: receiverId } },
+            where: { user: { id: receiver.id } },
             relations: ['user'],
             lock: { mode: 'pessimistic_write' },
         });

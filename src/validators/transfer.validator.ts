@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
 export const initiateTransferSchema = Joi.object({
-    receiverId: Joi.string().required().min(5).messages({
-        'string.base': `"receiverId" should be a type of 'string'`,
-        'string.empty': `"receiverId" cannot be an empty field`,
-        'any.required': '"receiverId" is required',
+    username: Joi.string().required().min(5).messages({
+        'string.base': `"username" should be a type of 'string'`,
+        'string.empty': `"username" cannot be an empty field`,
+        'any.required': '"username" is required',
     }),
 
     amount: Joi.number().required().messages({
