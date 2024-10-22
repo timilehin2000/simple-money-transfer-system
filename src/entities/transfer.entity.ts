@@ -4,12 +4,14 @@ import {
     ManyToOne,
     CreateDateColumn,
     JoinColumn,
+    Index,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { User } from './user.entity';
 import { TransferType } from '../interfaces/transfer.interface';
 
 @Entity('transfers')
+@Index('transfer_sender_receiver_idx', ['sender', 'receiver'])
 export class Transfer extends BaseEntity {
     @ManyToOne(() => User, (user) => user.sentTransfers)
     @JoinColumn({ name: 'senderId' })

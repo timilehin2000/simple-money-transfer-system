@@ -20,6 +20,7 @@ export class Wallet extends BaseEntity {
     })
     balance: number;
 
+    @Index('wallet_user_index')
     @OneToOne(() => User, (user) => user.wallet)
     @JoinColumn({ name: 'userId' })
     user: User;

@@ -13,7 +13,7 @@ export const generateAccessToken = (body: GenerateToken) => {
         { username: body.username, id: body.id },
         jwtSecret,
         {
-            expiresIn: '10m',
+            expiresIn: '15m',
         },
     );
 
